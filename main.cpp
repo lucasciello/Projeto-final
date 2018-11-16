@@ -1,65 +1,57 @@
 #include <iostream>
-#include "cofre.h"
+#include "fila.h"
+#include "node.h"
 
 using namespace std;
 
 int main()
-{   int selecao=0; //variavel usada para simular os botoes da maquina
-    int loop=0; //variavel usada para gerar o loop
-    float moeda; //varialvel usada para simular as moedas
-    cofre refrigerante;
+{
+    fila fila1;
+    fila fila2;
+    int selecao=0;
+    string anuncio;
+    int loop=0;
 
     while(loop == 0){
         switch (selecao){
             case 0:
-                refrigerante.getsaldo();
-                cout << "1 - MEET" << endl;
-                cout << "2 - ETIRPS" << endl;
-                cout << "3 - Depositar moeda" << endl;
-                cout << "4 - DEV" << endl;
+                cout << "1 - Incluir anuncio" << endl;
+                cout << "2 - Carregar" << endl;
+                cout << "3 - Remoner" << endl;
+                cout << "4 - Iniciar apresentacao dos anuncios" << endl;
                 cin >> selecao;
             break;
             case 1:
-                refrigerante.compra();
+                cout << "Digite o anuncio" << endl;
+                cin >> anuncio;
+                fila2.adicionaritem(anuncio);
                 selecao=0;
             break;
             case 2:
-                refrigerante.compra();
+                while(fila2.head != 0){
+                    fila1.adicionaritem(fila2.head->getVal());
+                    fila2.removeranuncio();
+                }
+                cout << "Anuncios adicionados a lista de reproducao" << endl;
                 selecao=0;
             break;
             case 3:
-                cout << "Valor da moeda" << endl;
-                cout << "1 - 0,25" << endl;
-                cout << "2 - 0,50" << endl;
-                cout << "3 - 1,00" << endl;
-                cin >> selecao;
-                    switch (selecao){
-                        case 1:
-                            moeda=0.25;
-                            selecao=0;
-                        break;
-                        case 2:
-                            moeda=0.50;
-                            selecao=0;
-                        break;
-                        case 3:
-                            moeda=1;
-                            selecao=0;
-                        break;
-                        default :
-                            cout << "Objeto nao identificado" << endl;
-                            moeda=0;
-                            selecao=0;
-                        break;
-                    }
-
-                refrigerante.setsaldo(0,moeda);
-
-            break;
-            case 4:
-                refrigerante.DEV();
+                if(fila1.head !=0){
+                    fila1.removeranuncio();
+                    cout << "Anuncio removido" << endl;
+                }
+                else{
+                    cout << "Nao existem anuncios" << endl;
+                }
                 selecao=0;
             break;
+            case 4:
+                while(loop == 0){
+                    cout << fila1.mostrar() << endl;
+                    anuncio=fila1.mostrar();
+                    fila1.removeranuncio();
+                    fila1.adicionaritem(anuncio);
+                }
             default :
                 selecao=0;
             break;
