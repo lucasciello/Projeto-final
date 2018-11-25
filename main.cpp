@@ -1,61 +1,75 @@
 #include <iostream>
-#include "fila.h"
-#include "node.h"
+#include "lista.h"
 
 using namespace std;
 
 int main()
 {
-    fila fila1;
-    fila fila2;
-    int selecao=0;
-    string anuncio;
+    List produtos;
     int loop=0;
+    int selecao=0;
+    int senha;
+    string novo;
+
+        produtos.insertAfterLast("cocacola-indisponivel");
+        produtos.insertAfterLast("fanta-indisponivel");
+        produtos.insertAfterLast("pureza-indisponivel");
+        produtos.insertAfterLast("MEET-disponivel");
+        produtos.insertAfterLast("ETIRPS-disponivel");
 
     while(loop == 0){
+
         switch (selecao){
             case 0:
-                cout << "1 - Incluir anuncio" << endl;
-                cout << "2 - Carregar" << endl;
-                cout << "3 - Remoner" << endl;
-                cout << "4 - Iniciar apresentacao dos anuncios" << endl;
+                cout << "1 - listar produtos" << endl;
+                cout << "2 - Modo programador" << endl; // senha:9090
                 cin >> selecao;
             break;
             case 1:
-                cout << "Digite o anuncio" << endl;
-                cin >> anuncio;
-                fila2.adicionaritem(anuncio);
+                produtos.listAll();
                 selecao=0;
             break;
             case 2:
-                while(fila2.head != 0){
-                    fila1.adicionaritem(fila2.head->getVal());
-                    fila2.removeranuncio();
-                }
-                cout << "Anuncios adicionados a lista de reproducao" << endl;
-                selecao=0;
-            break;
-            case 3:
-                if(fila1.head !=0){
-                    fila1.removeranuncio();
-                    cout << "Anuncio removido" << endl;
+                cout << "Senha:" << endl;
+                cin >> senha;
+
+                if(senha == 9090){
+                    cout << "1 - Adicionar produto" << endl;
+                    cout << "2 - remover produto" << endl;
+                    cout << "3 - Sair do modo programador" << endl;
+                    cin >> senha;
+
+                    switch (senha){
+                        case 1:
+                            cout << "Para adicionar o produto a lista, escreva no seguinte formato:" << endl;
+                            cout << "produto disponibilidade" << endl;
+                            cin >> novo;
+                            produtos.insertAfterLast(novo);
+                            selecao=0;
+                            cout << "produto adicionado" << endl;
+                        break;
+                        case 2:
+                            cout << "digite o anuncio a ser removido" << endl;
+                            cin >> novo;
+                            produtos.removeNode(novo);
+                            cout << "produto removido" << endl;
+                            selecao=0;
+                        break;
+                        case 3:
+                            selecao=0;
+                        break;
+                    }
                 }
                 else{
-                    cout << "Nao existem anuncios" << endl;
+                    cout << "Senha invalida" << endl;
+                    selecao=0;
                 }
-                selecao=0;
             break;
-            case 4:
-                while(loop == 0){
-                    cout << fila1.mostrar() << endl;
-                    anuncio=fila1.mostrar();
-                    fila1.removeranuncio();
-                    fila1.adicionaritem(anuncio);
-                }
             default :
                 selecao=0;
             break;
         }
     }
+
     return 0;
 }
