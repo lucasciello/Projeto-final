@@ -7,13 +7,13 @@ using namespace std;
 
 class cofre : public produto {
     private:
-        float saldo;
+        float saldo;//variavel usada para armazenar o saldo
     public:
         cofre();
         void setsaldo(int i, float val); // i=0 +, i=1 - ; função usada para acrescentar o valor da moeda colocada na maquina
-        void getsaldo();
-        void compra();
-        void DEV();
+        void getsaldo();//função usada para apresentar o saldo
+        int compra();//funcao usada para liberar o produto e descontar o saldo
+        int DEV();// funçao usada para devolver o saldo
 };
 
 cofre::cofre(){
@@ -40,16 +40,18 @@ void cofre::getsaldo(){
     cout << "Saldo: " << saldo << endl;
 }
 
-void cofre::compra(){
+int cofre::compra(){
     if(saldo >= 1.5){
         saldo=0;
-        cout << "retire seu refrigerante" << endl;
+        return 1;
     }
 }
 
-void cofre::DEV(){
-    cout << "Devolve: " << saldo << endl;
-    saldo = 0;
+int cofre::DEV(){
+    if(saldo != 0){
+        saldo = 0;
+        return 1;
+    }
 }
 
 #endif // COFRE_H_INCLUDED

@@ -11,7 +11,6 @@ public:
   void adicionaritem(string dat);
   string mostrar();
   string removeranuncio();
-  void listar();
 };
 
 fila::fila() {
@@ -52,14 +51,6 @@ string fila::removeranuncio() {
      Node* oldHead = head;
      head = head->getNext();
      delete oldHead;
-  }
-}
-
-void fila::listar() {
-  Node* aux = head;
-  while (aux != 0){
-     cout << aux->getVal() << endl;
-     aux = aux->getNext();
   }
 }
 

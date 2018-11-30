@@ -7,10 +7,8 @@ using namespace std;
 
 
 class List {
-
-  Node* head;
-
 public:
+  Node* head;
   List();
   ~List();
   void insertBeforeFirst(string dat);

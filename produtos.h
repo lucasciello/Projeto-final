@@ -10,7 +10,7 @@ class produto {
         float valor;
     public:
         produto();
-        virtual void compra()=0;
+        virtual int compra()=0;
 };
 
 produto::produto(){
